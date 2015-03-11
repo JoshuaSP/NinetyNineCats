@@ -1,0 +1,12 @@
+<tr>
+  <td><%= request.start_date %></td>
+  <td><%= request.end_date %></td>
+  <td>
+    <% if request.pending? %>
+      <%= button_to 'Approve', approve_cat_rental_request_url(request) %>
+      <%= button_to 'Deny', deny_cat_rental_request_url(request) %>
+    <% else %>
+      <%= request.status %>
+    <% end %>
+  </td>
+</tr>

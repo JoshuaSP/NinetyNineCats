@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Cats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Birth date</th>
+      <th>Color</th>
+      <th>Sex</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cats.each do |cat| %>
+      <tr>
+        <td><%= link_to cat.name, cat_url(cat) %></td>
+        <td><%= cat.birth_date %></td>
+        <td><%= cat.color %></td>
+        <td><%= cat.sex %></td>
+        <td><%= cat.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cat', new_cat_path %>
+<%=  link_to 'New Rental Request', new_cat_rental_request_path %>

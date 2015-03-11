@@ -1,0 +1,1 @@
+json.extract! @cat_rental_request, :id, :start_date, :end_date, :status, :cat_id, :cat, :created_at, :updated_at
