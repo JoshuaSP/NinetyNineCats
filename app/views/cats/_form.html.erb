@@ -2,6 +2,7 @@
 <% method = (cat.persisted? ? :patch : :post) %>
 
 <form action="<%= action %>" method="post">
+  <%= render 'shared/csrf' %>
   <input type="hidden" name="_method" value="<%= method %>">
 
   <div>
@@ -39,7 +40,7 @@
     <label for="cat_description">Description</label><br/>
     <textarea name="cat[description]" id="cat_description" cols="30" rows="10"><%= cat.description %></textarea>
   </div>
-  
+
   <div>
     <input type="submit" value="<%= cat.persisted? ? 'Update' : 'Create' %> cat"/>
   </div>

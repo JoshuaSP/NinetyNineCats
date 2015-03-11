@@ -1,5 +1,7 @@
 class CatsController < ApplicationController
+  before_action :not_logged_in?
   before_action :set_cat, only: [:show, :edit, :update, :destroy]
+  before_action :verify_owner, only: [:edit, :update, :destroy]
 
   def index
     @cats = Cat.all
@@ -17,6 +19,8 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
+    @cat.owner = current_user
+
     if @cat.save
       redirect_to cat_url(@cat)
     else
@@ -42,6 +46,13 @@ class CatsController < ApplicationController
 
   def set_cat
     @cat = Cat.find(params[:id])
+  end
+
+  def verify_owner
+    unless @cat.owner == current_user
+      flash[:errors] = ["That's not your cat!!"]
+      redirect_to cats_path
+    end
   end
 
   def cat_params

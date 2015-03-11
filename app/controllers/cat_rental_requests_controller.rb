@@ -1,5 +1,6 @@
 class CatRentalRequestsController < ApplicationController
   before_action :set_request, except: [:index, :new, :create]
+  before_action :not_logged_in?
 
   def index
     @cat_rental_requests = CatRentalRequest.all

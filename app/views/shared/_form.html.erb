@@ -1,0 +1,12 @@
+<form action="<%= action %>" method='POST'>
+  <%= render 'shared/csrf' %>
+  <label>
+    Login: <input type="text" name="user[username]" value="<%= user.username %>">
+  </label>
+  <br>
+  <label>
+    Password: <input type="password" name="user[password]">
+  </label>
+  <br>
+  <input type="submit">
+</form>

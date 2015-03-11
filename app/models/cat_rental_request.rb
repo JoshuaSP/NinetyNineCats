@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: cat_rental_requests
+#
+#  id         :integer          not null, primary key
+#  cat_id     :integer
+#  start_date :date             not null
+#  end_date   :date             not null
+#  status     :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class ValidDateValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     if record.changed_attributes[attribute] && record.changed_attributes[attribute] < Date.today
@@ -17,6 +30,7 @@ class CatRentalRequest < ActiveRecord::Base
   after_initialize :set_default_status
 
   validates_presence_of :cat_id, :end_date, :start_date, :status
+  validates :cat_id, numericality: { greater_than: 0 }
   validates :status, inclusion: STATUSES
   validates :start_date, :end_date, valid_date: true
   validate :start_not_after_end, :no_overlapping_approved_requests
